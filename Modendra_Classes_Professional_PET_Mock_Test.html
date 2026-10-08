@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSSSC PET : भारतीय संविधान एवं राजव्यवस्था | मोदेंद्र क्लासेस PYQ | मोदेंद्र क्लासेस</title>
+    <style>
+        /* थीम: पार्लियामेंट्री ब्लू & एम्बर (Constitution & Polity UI) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #08111e;
+            color: #f1f5f9;
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: #0f1c2e; 
+            min-height: 100vh; 
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.2); 
+            border-left: 1px solid #1e3352; 
+            border-right: 1px solid #1e3352; 
+        }
+        
+        /* पहला पेज (Welcome Screen) */
+        .welcome-screen {
+            text-align: center; 
+            padding: 60px 20px;
+            background: radial-gradient(circle at top, #162f52 0%, #08111e 100%);
+            color: #f8fafc; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+        }
+        .exam-logo { 
+            font-size: 4.8em; 
+            margin-bottom: 15px; 
+            filter: drop-shadow(0 0 18px rgba(96, 165, 250, 0.7));
+        }
+        .welcome-screen h1 { 
+            font-size: 2.1em; 
+            color: #60a5fa; 
+            margin-bottom: 10px; 
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .welcome-screen p { font-size: 1.1em; color: #94a3b8; }
+        .author-tag { margin-top: 15px; font-weight: bold; font-size: 1.35em; color: #fbbf24; }
+        
+        .tg-container { margin: 25px 0; width: 100%; }
+        .tg-link {
+            display: block; 
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); 
+            color: #ffffff !important;
+            text-decoration: none; 
+            padding: 15px 25px; 
+            border-radius: 10px;
+            font-weight: bold; 
+            margin: 12px auto; 
+            max-width: 440px; 
+            transition: 0.3s;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .tg-link:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 22px rgba(96, 165, 250, 0.5); 
+        }
+
+        .info-box { 
+            background: rgba(22, 47, 82, 0.5); 
+            padding: 20px 25px; 
+            border-radius: 12px; 
+            margin: 20px auto; 
+            border: 1px dashed #60a5fa;
+            max-width: 600px;
+            color: #f1f5f9;
+            font-size: 1.05em;
+            line-height: 1.7;
+            text-align: left;
+        }
+        .start-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); 
+            color: white; 
+            border: none; 
+            padding: 18px 55px;
+            font-size: 1.3em; 
+            font-weight: bold; 
+            border-radius: 10px; 
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4); 
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .start-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 25px rgba(96, 165, 250, 0.6); 
+        }
+
+        /* क्विज स्क्रीन */
+        .quiz-screen { display: none; padding: 25px; }
+        .quiz-header {
+            text-align: center; 
+            margin-bottom: 25px; 
+            padding: 20px;
+            background: #142844; 
+            color: #f8fafc; 
+            border-radius: 10px;
+            position: sticky; 
+            top: 10px; 
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border: 1px solid #1e3a63;
+        }
+        .progress-bar-wrap { 
+            background: rgba(255,255,255,0.1); 
+            height: 10px; 
+            border-radius: 5px; 
+            margin: 14px 0 8px 0; 
+            overflow: hidden;
+        }
+        #progressBar { 
+            background: linear-gradient(90deg, #60a5fa, #fbbf24); 
+            height: 100%; 
+            width: 0%; 
+            border-radius: 5px; 
+            transition: 0.3s ease; 
+        }
+
+        .question-container { 
+            margin-bottom: 25px; 
+            padding: 24px; 
+            background: #122138; 
+            border-radius: 10px; 
+            border: 1px solid #1e375b; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .topic-tag {
+            display: inline-block;
+            background: rgba(96, 165, 250, 0.15);
+            color: #60a5fa;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+        .exam-tag {
+            display: inline-block;
+            background: rgba(148, 163, 184, 0.15);
+            color: #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-bottom: 12px;
+            margin-left: 8px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+        .question-text { 
+            font-size: 1.15em; 
+            font-weight: 600; 
+            margin-bottom: 18px; 
+            color: #f8fafc; 
+            line-height: 1.6; 
+            white-space: pre-line;
+        }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .option { 
+            padding: 15px 20px; 
+            border: 1px solid #1e375b; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            background: #0f1c2e; 
+            font-weight: 500; 
+            color: #cbd5e1; 
+        }
+        .option:hover { 
+            background: #1a3152; 
+            border-color: #60a5fa; 
+            color: #ffffff;
+        }
+        .option.selected { 
+            background: #2563eb; 
+            color: #ffffff; 
+            border-color: #60a5fa; 
+            font-weight: bold;
+            box-shadow: 0 0 14px rgba(37, 99, 235, 0.5); 
+        }
+
+        .submit-btn { 
+            display: block; 
+            width: 280px; 
+            margin: 40px auto; 
+            padding: 18px; 
+            background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%); 
+            color: #08111e; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 1.25em; 
+            font-weight: 800; 
+            cursor: pointer; 
+            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4); 
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(96, 165, 250, 0.6); }
+
+        /* आख़िरी पेज (Result Screen) */
+        .result-screen { display: none; padding: 30px; text-align: center; }
+        .score-card { 
+            background: radial-gradient(circle at center, #162f52 0%, #08111e 100%); 
+            color: #f8fafc; 
+            padding: 40px 20px; 
+            border-radius: 14px; 
+            margin-bottom: 35px; 
+            box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+            border: 1px solid #1e3a63;
+        }
+        .score-main { 
+            font-size: 4.2em; 
+            font-weight: 800; 
+            display: block; 
+            color: #fbbf24; 
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.4); 
+        }
+        .review-item { 
+            text-align: left; 
+            background: #122138; 
+            padding: 22px; 
+            margin-bottom: 20px; 
+            border-radius: 10px; 
+            border-left: 6px solid #64748b; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25); 
+            border-top: 1px solid #1e375b; 
+            border-right: 1px solid #1e375b; 
+            border-bottom: 1px solid #1e375b; 
+        }
+        .correct-ans { color: #4ade80; font-weight: bold; margin-top: 6px; }
+        .wrong-ans { color: #f87171; font-weight: bold; margin-top: 6px; }
+
+        .feedback-box { 
+            margin: 30px 0; 
+            padding: 22px; 
+            background: #122138; 
+            border-radius: 10px; 
+            border: 1px solid #1e375b; 
+        }
+        .tg-username { 
+            font-size: 1.7em; 
+            font-weight: bold; 
+            color: #60a5fa; 
+            text-decoration: none; 
+            display: block; 
+        }
+    
+        .brand-badge {
+            display:inline-block;
+            margin-top:12px;
+            padding:7px 14px;
+            border-radius:999px;
+            background:rgba(251,191,36,.12);
+            border:1px solid rgba(251,191,36,.35);
+            color:#fbbf24;
+            font-size:.9em;
+            font-weight:700;
+            letter-spacing:.2px;
+        }
+        .tg-link {
+            position:relative;
+            overflow:hidden;
+        }
+        .tg-link::after {
+            content:'↗';
+            float:right;
+            font-size:1.1em;
+            opacity:.85;
+        }
+        .footer-brand {
+            margin-top:18px;
+            color:#94a3b8;
+            font-size:.9em;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- पहला पेज (Welcome Screen) -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="exam-logo">⚖️</div>
+        <h1>UPSSSC PET : भारतीय संविधान एवं राजव्यवस्था | मोदेंद्र क्लासेस</h1>
+        <p>पिछले वर्षों के महत्वपूर्ण प्रश्न (PYQ Mock Test — कुल 57 प्रश्न)</p>
+        <p class="author-tag">मोदेंद्र क्लासेस</p><div class="brand-badge">🎯 PET • PYQ • MOCK TEST</div>
+        
+        <div class="tg-container">
+            <a href="https://t.me/" target="_blank" class="tg-link">📚 मोदेंद्र क्लासेस</a>
+            <a href="https://t.me/" target="_blank" class="tg-link">📚 मोदेंद्र क्लासेस</a>
+        </div>
+
+        <div class="info-box">
+            <p>📝 <b>कुल प्रश्न:</b> 57 | 🎯 <b>पूर्णांक:</b> 57 अंक</p>
+            <p>📜 <b>अध्यायवार कवरेज:</b><br>
+            • अध्याय 1: भारतीय संविधान एवं निर्माण (Q1–Q20)<br>
+            • अध्याय 2: मुख्य विशेषताएं एवं स्रोत (Q21–Q34)<br>
+            • अध्याय 3: राज्य के नीति-निदेशक सिद्धांत (Q35–Q42)<br>
+            • अध्याय 4: मौलिक अधिकार एवं कर्तव्य (Q43–Q57)</p>
+        </div>
+        <button class="start-btn" onclick="startQuiz()">टेस्ट शुरू करें</button>
+    </div>
+
+    <!-- दूसरा पेज (Quiz Screen) -->
+    <div class="quiz-screen" id="quizScreen">
+        <div class="quiz-header">
+            <h3>🏛️ UPSSSC PET : भारतीय संविधान एवं राजव्यवस्था | मोदेंद्र क्लासेस</h3>
+            <div class="progress-bar-wrap"><div id="progressBar"></div></div>
+            <p id="qCounter">प्रगति: 0/57</p>
+        </div>
+        <div id="questionsContainer"></div>
+        <button class="submit-btn" onclick="showResults()">🏁 स्कोर देखें</button>
+    </div>
+
+    <!-- आख़िरी पेज (Result Screen) -->
+    <div class="result-screen" id="resultScreen">
+        <div class="score-card">
+            <h2>आपका परीक्षा परिणाम</h2>
+            <span class="score-main" id="finalPercent">0%</span>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                <div><span id="statCorrect" style="font-size:1.8em; font-weight:bold; color: #4ade80;">0</span><br><span style="color:#cbd5e1;">सही</span></div>
+                <div><span id="statWrong" style="font-size:1.8em; font-weight:bold; color: #f87171;">0</span><br><span style="color:#cbd5e1;">गलत</span></div>
+                <div><span id="statUnattempted" style="font-size:1.8em; font-weight:bold; color: #94a3b8;">0</span><br><span style="color:#cbd5e1;">छोड़े गए</span></div>
+            </div>
+        </div>
+        <div id="reviewContainer"></div>
+
+        <!-- फीडबैक बॉक्स -->
+        <div class="feedback-box">
+            <a href="https://t.me/" target="_blank" class="tg-username">📚 मोदेंद्र क्लासेस</a>
+            <p style="margin-top: 8px; font-weight: 500; color: #cbd5e1;">नियमित टेस्ट और अध्ययन सामग्री के लिए टेलीग्राम चैनल से जुड़ें।</p>
+        </div>
+
+        <button class="start-btn" onclick="location.reload()" style="margin-bottom: 20px;">🔄 पुनः हल करें</button>
+        <div class="footer-brand">© मोदेंद्र क्लासेस • आपकी तैयारी, हमारी जिम्मेदारी</div>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        // अध्याय 1: भारतीय संविधान (Q1 - Q20)
+        {
+            num: 1,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC VDO 26/06/2023 (Shift-I)",
+            q: "भारतीय संविधान का कौन-सा अनुच्छेद 'राष्ट्रीय अनुसूचित जाति आयोग' से संबंधित है?",
+            opts: ["अनुच्छेद-326", "अनुच्छेद-333", "अनुच्छेद-330", "अनुच्छेद-338"],
+            ans: 3
+        },
+        {
+            num: 2,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC VDO 26/06/2023 (Shift-I)",
+            q: "भारतीय संविधान के किस अनुच्छेद के अनुसार संघ की राजभाषा हिन्दी और लिपि देवनागरी होगी?",
+            opts: ["अनुच्छेद 346", "अनुच्छेद 342", "अनुच्छेद 344", "अनुच्छेद 343"],
+            ans: 3
+        },
+        {
+            num: 3,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC VDO 27/06/2023 (Shift-I)",
+            q: "भारतीय संविधान के किस अनुच्छेद के अंतर्गत किसी राज्य में राष्ट्रपति शासन लगाया जाता है?",
+            opts: ["अनुच्छेद 370", "अनुच्छेद 380", "अनुच्छेद 326", "अनुच्छेद 356"],
+            ans: 3
+        },
+        {
+            num: 4,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC PET 15/10/2022 (Shift-I)",
+            q: "उच्चतम न्यायालय (सर्वोच्च न्यायालय) की स्थापना एवं गठन का प्रावधान किस अनुच्छेद में है?",
+            opts: ["अनुच्छेद 120", "अनुच्छेद 118", "अनुच्छेद 122", "अनुच्छेद 124"],
+            ans: 3
+        },
+        {
+            num: 5,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC PET 16/10/2022 (Shift-II)",
+            q: "'धन विधेयक' को संविधान के किस अनुच्छेद में परिभाषित किया गया है?",
+            opts: ["अनुच्छेद 110", "इनमें से कोई नहीं", "अनुच्छेद 112", "अनुच्छेद 111"],
+            ans: 0
+        },
+        {
+            num: 6,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC PET 16/10/2022 (Shift-II)",
+            q: "भारतीय संविधान का अनुच्छेद-343 निम्नलिखित में से किससे संबंधित है?",
+            opts: ["भारत के राष्ट्रपति", "संघ की राजभाषा", "राज्यपाल द्वारा विशेष संबोधन", "संसद का संविधान"],
+            ans: 1
+        },
+        {
+            num: 7,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC PET 15/10/2022 (Shift-II)",
+            q: "भारतीय संविधान का कौन-सा अनुच्छेद 'अल्पसंख्यकों के हितों के संरक्षण' से संबंधित है?",
+            opts: ["अनुच्छेद 30", "अनुच्छेद 26", "अनुच्छेद 27", "अनुच्छेद 29"],
+            ans: 3
+        },
+        {
+            num: 8,
+            sec: "भारतीय संविधान",
+            exam: "Lekhpal Main Exam - 2022",
+            q: "राज्य के नीति निदेशक सिद्धांत संविधान के किन अनुच्छेदों में वर्णित हैं?",
+            opts: ["अनुच्छेद 36-51", "अनुच्छेद 30-49", "अनुच्छेद 42-56", "अनुच्छेद 28-48"],
+            ans: 0
+        },
+        {
+            num: 9,
+            sec: "भारतीय संविधान",
+            exam: "Lekhpal Main Exam - 2022",
+            q: "प्रेस की स्वतंत्रता भारतीय संविधान के किस अनुच्छेद में अंतर्निहित मानी जाती है?",
+            opts: ["अनुच्छेद 19", "अनुच्छेद 20", "अनुच्छेद 21", "अनुच्छेद 22"],
+            ans: 0
+        },
+        {
+            num: 10,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC Supply Inspector (17/07/2022)",
+            q: "मूल भारतीय संविधान में कुल कितनी अनुसूचियां थीं?",
+            opts: ["9 अनुसूची", "8 अनुसूची", "10 अनुसूची", "12 अनुसूची"],
+            ans: 1
+        },
+        {
+            num: 11,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC Supply Inspector (17/07/2022)",
+            q: "भारत के संविधान की प्रस्तावना को अन्य किस नाम से भी जाना जाता है?",
+            opts: ["आमुख (Preamble)", "प्रलेख", "राज्य नीति के निदेशक सिद्धान्त", "संविधान की मुख्य विशेषताएं"],
+            ans: 0
+        },
+        {
+            num: 12,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC Lower Mains 2019 (21/10/2021)",
+            q: "संविधान सभा की प्रथम बैठक (अधिवेशन) कब आयोजित की गई थी?",
+            opts: ["25 दिसम्बर, 1949", "11 नवम्बर, 1946", "26 जनवरी, 1949", "09 दिसम्बर, 1946"],
+            ans: 3
+        },
+        {
+            num: 13,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC",
+            q: "संघ और राज्यों के बीच विधायी संबंधों का उल्लेख संविधान के किस भाग और अध्याय में है?",
+            opts: ["भाग 11 और अध्याय 1", "भाग 11 और अध्याय 2", "भाग 12 और अध्याय 1", "भाग 12 और अध्याय 2"],
+            ans: 0
+        },
+        {
+            num: 14,
+            sec: "भारतीय संविधान",
+            exam: "Lower-II (Re-exam) (28-07-2019)",
+            q: "संविधान सभा द्वारा भारत के संविधान को कब अंगीकृत/पारित किया गया?",
+            opts: ["26 जनवरी 1950", "26 नवंबर 1949", "14 अगस्त 1947", "15 अगस्त 1947"],
+            ans: 1
+        },
+        {
+            num: 15,
+            sec: "भारतीय संविधान",
+            exam: "Cane Supervisor (31-08-2019)",
+            q: "वर्ष 1946 की अंतरिम सरकार में कार्यकारी परिषद के उपाध्यक्ष कौन थे?",
+            opts: ["सर क्लाउड ऑचिनलेक", "सी. एच. भाभा", "सी. राजगोपालाचारी", "जवाहर लाल नेहरू"],
+            ans: 3
+        },
+        {
+            num: 16,
+            sec: "भारतीय संविधान",
+            exam: "UPSSSC Instructor 2016 / लोअर द्वितीय 2018",
+            q: "वर्ष 1934-35 में भारत के लिए संविधान सभा का विचार सर्वप्रथम किसने प्रस्तुत किया था?",
+            opts: ["नेहरू", "गांधी", "जे. पी. नारायण", "एम. एन. रॉय"],
+            ans: 3
+        },
+        {
+            num: 17,
+            sec: "भारतीय संविधान",
+            exam: "राज्य मंडी परिषद (30-05-2019, Shift-I)",
+            q: "संविधान सभा में अल्पसंख्यकों की उप-समिति के अध्यक्ष कौन थे?",
+            opts: ["अल्लादी कृष्णास्वामी अय्यर", "बी. पट्टाभि सीतारमैय्या", "एच. सी. मुखर्जी", "के. एम. मुंशी"],
+            ans: 2
+        },
+        {
+            num: 18,
+            sec: "भारतीय संविधान",
+            exam: "लोअर द्वितीय (06-03-2016)",
+            q: "भारतीय संविधान सभा में कुल महिला सदस्यों की संख्या कितनी थी?",
+            opts: ["12", "13", "15", "17"],
+            ans: 2
+        },
+        {
+            num: 19,
+            sec: "भारतीय संविधान",
+            exam: "असिस्टेंट एकाउन्टेंट (22-11-2015)",
+            q: "संविधान सभा की प्रारूप समिति (ड्राफ्टिंग कमेटी) के अध्यक्ष कौन थे?",
+            opts: ["एन. गोपालास्वामी", "के. एम. मुंशी", "एन. माधव राव", "डॉ. बी. आर. अम्बेडकर"],
+            ans: 3
+        },
+        {
+            num: 20,
+            sec: "भारतीय संविधान",
+            exam: "कनिष्ठ सहायक (24-04-2016)",
+            q: "\"राजनीतिक प्रजातंत्र का तात्पर्य उस जीवन विधा से है जो जीवन में सैद्धांतिक रूप से उदारता, समानता और भ्रातृत्व को स्वीकारती है।\" यह कथन किसका है?",
+            opts: ["डॉ. बी. आर. अम्बेडकर", "डॉ. राजेन्द्र प्रसाद", "डॉ. सर्वपल्ली राधाकृष्णन्", "डॉ. राममनोहर लोहिया"],
+            ans: 0
+        },
+
+        // अध्याय 2: भारतीय संविधान की मुख्य विशेषताएं (Q21 - Q34)
+        {
+            num: 21,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC VDO 26/06/2023 (Shift-I)",
+            q: "भारतीय संविधान में 'सामाजिक समानता' से क्या अभिप्राय है?",
+            opts: [
+                "केवल महिलाओं को समान अवसर",
+                "मौजूदा प्रणाली को संशोधित करने के लिए कोई प्रयास नहीं किया जाना चाहिए",
+                "विशिष्ट वर्ग के प्रति पक्षपात",
+                "समाज के सभी वर्गों के लिए समान अवसर"
+            ],
+            ans: 3
+        },
+        {
+            num: 22,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC PET 16/10/2022 (Shift-I)",
+            q: "निम्नलिखित में से कौन-सी भारतीय संविधान की प्रमुख विशेषता नहीं है?",
+            opts: ["लिखित और विस्तृत संविधान", "द्वि-स्तरीय सरकार", "एकल नागरिकता", "सार्वभौमिक वयस्क मताधिकार"],
+            ans: 1
+        },
+        {
+            num: 23,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC PET 16/10/2022 (Shift-I)",
+            q: "भारतीय संविधान में राज्य के नीति निदेशक सिद्धांत (DPSP) किस देश के संविधान से लिए गए हैं?",
+            opts: ["यू.एस.ए.", "फ्रांस", "आयरलैंड", "इनमें से कोई नहीं"],
+            ans: 2
+        },
+        {
+            num: 24,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC Supply Inspector (17/07/2022)",
+            q: "भारतीय संविधान में 'मौलिक अधिकार' की अवधारणा किस देश से ग्रहण की गई है?",
+            opts: ["यू.एस.ए.", "तत्कालीन यूएसएसआर", "यू.के.", "जापान"],
+            ans: 0
+        },
+        {
+            num: 25,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC Supply Inspector (17/07/2022)",
+            q: "भारतीय संविधान में स्वतंत्रता, समानता और बंधुत्व के आदर्श किस देश की क्रांति से प्रेरित हैं?",
+            opts: ["फ्रांसीसी संविधान", "ग्रीक संविधान", "रूसी संविधान", "अमेरिकी संविधान"],
+            ans: 0
+        },
+        {
+            num: 26,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC Supply Inspector (17/07/2022)",
+            q: "निम्नलिखित में से कौन-सा लक्षण भारत के संविधान से मेल नहीं खाता?",
+            opts: ["विस्तृत सरकार", "सार्वभौमिक वयस्क मताधिकार", "राज्य नीति के निदेशक सिद्धान्त", "सबसे छोटा लिखित संविधान"],
+            ans: 3
+        },
+        {
+            num: 27,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC PET 24/08/2021 (Shift-II)",
+            q: "निम्नलिखित में से कौन-सा भारतीय संविधान का लक्षण नहीं है?",
+            opts: ["अर्ध-संघीय संरचना", "प्रतिबद्ध न्यायतंत्र", "शक्तियों का वितरण", "लिखित संविधान और संविधान की सर्वोच्चता"],
+            ans: 1
+        },
+        {
+            num: 28,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC Lower Mains 2019 (21/10/2021)",
+            q: "भारतीय संविधान की प्रस्तावना का मुख्य उद्देश्य क्या सुनिश्चित करना है?",
+            opts: [
+                "सभी व्यक्तियों के मौलिक अधिकारों को",
+                "भारत के नागरिकों के मौलिक कर्तव्यों को",
+                "सरकारी कर्मचारियों की सेवा की सुरक्षा को",
+                "व्यक्ति की गरिमा तथा राष्ट्र की एकता और अखंडता को"
+            ],
+            ans: 3
+        },
+        {
+            num: 29,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "UPSSSC Lower Mains 2019 / ASO 2022",
+            q: "भारतीय संविधान में 'अवशिष्ट शक्तियों' (Residuary Powers) का विचार किस देश से लिया गया है?",
+            opts: ["आयरलैंड", "संयुक्त राज्य अमेरिका", "यूनाइटेड किंगडम", "कनाडा"],
+            ans: 3
+        },
+        {
+            num: 30,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "लोअर द्वितीय (15-07-2018)",
+            q: "मूल भारतीय संविधान अंग्रेजी में लगभग कितने शब्दों से मिलकर बना है?",
+            opts: ["40000", "60000", "80000", "120000"],
+            ans: 3
+        },
+        {
+            num: 31,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "कनिष्ठ सहायक (31-05-2015)",
+            q: "भारत का संविधान तैयार होने में कितना समय लगा था?",
+            opts: [
+                "दो वर्ष से अधिक किन्तु तीन वर्ष से कम अवधि में",
+                "तीन वर्षों में",
+                "तीन वर्ष से अधिक अवधि में",
+                "दो वर्षों में"
+            ],
+            ans: 0
+        },
+        {
+            num: 32,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "कनिष्ठ सहायक (31-05-2019)",
+            q: "भारतीय संविधान की प्रस्तावना अपने नागरिकों को किस प्रकार की समानता का वचन देती है?",
+            opts: ["अभिव्यक्ति और विश्वास", "हैसियत और अवसर", "विचार और अभिव्यक्ति", "अवसर और अभिव्यक्ति"],
+            ans: 1
+        },
+        {
+            num: 33,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "ग्राम विकास अधिकारी (23-12-2018, Shift-I)",
+            q: "इनमें से कौन-सा कथन भारतीय संविधान की विशेषता के विपरीत है?",
+            opts: [
+                "यह एक 'लिखित' संविधान है।",
+                "यह 'अनम्य' है तथापि 'नम्य' भी है।",
+                "यह एकात्मक झुकाव के साथ संघीय व्यवस्था है।",
+                "इसे राज्य के राज्यपाल (सांसदों और विधायकों के परामर्श से) संशोधित कर सकते हैं।"
+            ],
+            ans: 3
+        },
+        {
+            num: 34,
+            sec: "संविधान की मुख्य विशेषताएं",
+            exam: "राजस्व लेखपाल 2015 / Instructor 2023",
+            q: "किसे 'संविधान की आत्मा' के रूप में स्वीकार किया गया है?",
+            opts: ["राज्य के नीति निर्देशक सिद्धान्त", "राष्ट्रीय ध्वज", "प्रस्तावना", "मूल अधिकार"],
+            ans: 2
+        },
+
+        // अध्याय 3: राज्य के नीति-निदेशक सिद्धांत (DPSP) (Q35 - Q42)
+        {
+            num: 35,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "UPSSSC VDO 26/06/2023 (Shift-II)",
+            q: "कानून व नीतियां बनाते समय राज्य को किन मार्गदर्शक आदर्शों को ध्यान में रखना चाहिए?",
+            opts: ["समाजवाद", "मौलिक अधिकार", "गांधीवादी सिद्धांत", "राज्य नीति के निदेशक सिद्धांत"],
+            ans: 3
+        },
+        {
+            num: 36,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "UPSSSC PET 15/10/2022 (Shift-II)",
+            q: "42वें संविधान संशोधन अधिनियम द्वारा नीति-निदेशक तत्वों में कौन-सा नया प्रावधान जोड़ा गया था?",
+            opts: [
+                "मादक पेय और ड्रग की खपत को प्रतिबंधित करना",
+                "समान न्याय और निःशुल्क विधिक सहायता",
+                "राष्ट्रों के बीच अंतर्राष्ट्रीय शांति और सुरक्षा को बढ़ावा देना",
+                "आय, स्थिति, सुविधाओं और अवसरों में असमानताओं को कम करना"
+            ],
+            ans: 1
+        },
+        {
+            num: 37,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "UPSSSC PET 16/10/2022 (Shift-II)",
+            q: "वे आदर्श कौन-से हैं जिन्हें नीतियों का निर्माण करते समय राज्य द्वारा ध्यान में रखा जाना आवश्यक है?",
+            opts: ["मौलिक अधिकार", "समाजवाद", "गांधीवादी सिद्धान्त", "राज्य नीति के निदेशक सिद्धान्त"],
+            ans: 3
+        },
+        {
+            num: 38,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "UPSSSC PET 24/08/2021 (Shift-II)",
+            q: "भारतीय नागरिकों को 'आर्थिक न्याय' की व्यवस्था किसके माध्यम से प्रदान की जाती है?",
+            opts: ["मौलिक अधिकार", "मौलिक कर्तव्य", "राज्य नीति के निदेशक सिद्धांत", "इनमें से कोई नहीं"],
+            ans: 2
+        },
+        {
+            num: 39,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "Lower Exam (01-10-2019, Shift-I)",
+            q: "अंतर्राष्ट्रीय शांति और सुरक्षा को प्रोत्साहन देने से संबंधित प्रावधान संविधान के किस भाग में उल्लिखित हैं?",
+            opts: ["मौलिक अधिकार", "राज्य नीति के निर्देशक सिद्धांत", "मौलिक कर्तव्य", "राज्यों"],
+            ans: 1
+        },
+        {
+            num: 40,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "Lower 2003-04 / UDA/LDA 2010",
+            q: "'समान कार्य के लिए समान वेतन' भारतीय संविधान में किस रूप में सुनिश्चित किया गया है?",
+            opts: ["मौलिक अधिकार है", "राज्य के नीति-निर्देशक सिद्धान्तों का अंग है", "मौलिक कर्तव्य है", "आर्थिक अधिकार है"],
+            ans: 1
+        },
+        {
+            num: 41,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "Lower 2013 / Lower 2004-05",
+            q: "भारतीय संविधान में 'कल्याणकारी राज्य' (Welfare State) की संकल्पना किसमें प्रतिष्ठापित है?",
+            opts: ["उद्देशिका", "राज्य की नीति के निदेशक तत्व", "मूल अधिकार", "सातवीं अनुसूची"],
+            ans: 1
+        },
+        {
+            num: 42,
+            sec: "नीति-निदेशक सिद्धांत (DPSP)",
+            exam: "UDA/LDA 2010",
+            q: "निम्नलिखित में से कौन-सा विषय वर्तमान में राज्य के नीति-निदेशक तत्वों का अंग नहीं है?",
+            opts: [
+                "मद्यनिषेध",
+                "गौ-संरक्षण",
+                "पर्यावरण-संरक्षण",
+                "चौदह (14) वर्ष की आयु तक के बच्चों को निःशुल्क शिक्षा"
+            ],
+            ans: 3
+        },
+
+        // अध्याय 4: मौलिक अधिकार एवं कर्तव्य (Q43 - Q57)
+        {
+            num: 43,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC VDO 26/06/2023 (Shift-II)",
+            q: "मौलिक अधिकारों के संदर्भ में निम्नलिखित में से कौन-सा कथन सत्य है?",
+            opts: [
+                "प्रत्येक नागरिक को राष्ट्रपति की इच्छा के अनुसार मौलिक अधिकार दिए गए हैं।",
+                "मौलिक अधिकार हमारे प्राकृतिक अधिकार हैं और अहस्तांतरणीय अधिकार हैं।",
+                "मौलिक अधिकार उम्र पर आधारित हैं और अहस्तांतरणीय अधिकार हैं।",
+                "मौलिक अधिकारों को केवल राष्ट्रीय आपातकाल के दौरान ही निलंबित किया जा सकता है।"
+            ],
+            ans: 3
+        },
+        {
+            num: 44,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC PET 15/10/2022 (Shift-II)",
+            q: "निम्नलिखित में से कौन-सा नागरिकों का मूल कर्तव्य है?",
+            opts: [
+                "ये सभी",
+                "सार्वजनिक संपत्ति की सुरक्षा करना",
+                "वैज्ञानिक दृष्टिकोण और मानववाद विकसित करना",
+                "भारत की संप्रभुता, अखंडता और एकता की रक्षा करना"
+            ],
+            ans: 0
+        },
+        {
+            num: 45,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC PET 15/10/2022 (Shift-I)",
+            q: "नागरिकों के मौलिक अधिकारों के प्रवर्तन (लागू कराने) की शक्ति किन्हें प्राप्त है?",
+            opts: ["सर्वोच्च न्यायालय और उच्च न्यायालयों", "संसद सदस्यों", "राष्ट्रपति", "इनमें से कोई नहीं"],
+            ans: 0
+        },
+        {
+            num: 46,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC PET 16/10/2022 (Shift-II)",
+            q: "भारतीय संविधान में मूल कर्तव्यों का समावेश किस भाग में किया गया है?",
+            opts: ["भाग-IV क", "अनुसूची IV-क", "भाग-III", "भाग-IV"],
+            ans: 0
+        },
+        {
+            num: 47,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC PET 16/10/2022 (Shift-I)",
+            q: "भारतीय संविधान के अनुच्छेद 19 में कौन-सा प्रमुख अधिकार समाहित है?",
+            opts: [
+                "संवैधानिक उपचारों का अधिकार",
+                "वाक् और अभिव्यक्ति स्वातंत्र्य का अधिकार",
+                "शोषण के विरुद्ध अधिकार",
+                "धर्म की स्वतंत्रता का अधिकार"
+            ],
+            ans: 1
+        },
+        {
+            num: 48,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC Supply Inspector (17/07/2022)",
+            q: "'बंदी प्रत्यक्षीकरण' (Habeas Corpus) याचिका संविधान के किस भाग के अंतर्गत आती है?",
+            opts: ["प्रस्तावना", "मौलिक कर्तव्य", "राज्य नीति के निदेशक सिद्धान्त", "मौलिक अधिकार"],
+            ans: 3
+        },
+        {
+            num: 49,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "कनिष्ठ सहायक 2015 / Lower 2019 / Comp. Op. 2020",
+            q: "42वें संविधान संशोधन 1976 द्वारा संविधान में कुल कितने मौलिक कर्तव्य जोड़े गए थे?",
+            opts: ["11", "9", "10", "12"],
+            ans: 2
+        },
+        {
+            num: 50,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "Cane Supervisor (31-08-2019)",
+            q: "मौलिक कर्तव्यों से संबंधित अनुच्छेद 51A संविधान में किस संशोधन द्वारा अंतःस्थापित हुआ?",
+            opts: ["42वें संशोधन अधिनियम", "41वें संशोधन अधिनियम", "44वें संशोधन अधिनियम", "45वें संशोधन अधिनियम"],
+            ans: 0
+        },
+        {
+            num: 51,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "राजस्व लेखपाल 2015 / VDO 2016",
+            q: "संविधान में मौलिक कर्तव्यों को शामिल करने की अनुशंसा किस समिति ने की थी?",
+            opts: ["मल्होत्रा समिति", "नरसिम्हन समिति", "राघवन समिति", "स्वर्ण सिंह समिति"],
+            ans: 3
+        },
+        {
+            num: 52,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC Lower Mains 2019 (21/10/2021)",
+            q: "सूची-I को सूची-II से सुमेलित कीजिए:\nसूची-I: A. भेदभाव का प्रतिषेध, B. बालकों के नियोजन का प्रतिषेध, C. गिरफ्तारी से संरक्षण, D. अस्पृश्यता उन्मूलन\nसूची-II: 1. अनु. 22, 2. अनु. 15, 3. अनु. 24, 4. अनु. 17",
+            opts: ["1, 4, 2, 3", "2, 3, 1, 4", "2, 4, 1, 3", "1, 3, 2, 4"],
+            ans: 1
+        },
+        {
+            num: 53,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC Lower Mains 2019 (21/10/2021)",
+            q: "सर्व शिक्षा अभियान का उद्देश्य किस आयु वर्ग के बच्चों में शिक्षा को प्रोत्साहित करना है?",
+            opts: ["6 से 14 वर्ष", "इनमें से कोई नहीं", "14 से 20 वर्ष", "5 से 9 वर्ष"],
+            ans: 0
+        },
+        {
+            num: 54,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC PET 24/08/2021 (Shift-I)",
+            q: "संविधान का कौन-सा अनुच्छेद अल्पसंख्यकों के हितों के संरक्षण से जुड़ा है?",
+            opts: ["अनुच्छेद 21", "अनुच्छेद 24", "अनुच्छेद 29", "इनमें से कोई नहीं"],
+            ans: 2
+        },
+        {
+            num: 55,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "UPSSSC PET 24/08/2021 (Shift-I)",
+            q: "शिक्षा का अधिकार (Right to Education) किस अनुच्छेद के तहत मौलिक अधिकार घोषित है?",
+            opts: ["अनुच्छेद 21A से", "अनुच्छेद 19", "अनुच्छेद 29 एवं 30", "इनमें से कोई नहीं"],
+            ans: 0
+        },
+        {
+            num: 56,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "होम्योपैथिक (2019)",
+            q: "मानव के क्रय-विक्रय (दुर्व्यापार) और बेगार/जबरन मजदूरी (बलात् श्रम) पर रोक कौन-सा अनुच्छेद लगाता है?",
+            opts: ["23वां", "26वां", "24वां", "32वां"],
+            ans: 0
+        },
+        {
+            num: 57,
+            sec: "मौलिक अधिकार एवं कर्तव्य",
+            exam: "विधान भवन रक्षक (02-12-2018, Shift-II)",
+            q: "निम्नलिखित में से कौन-सा मौलिक अधिकार अल्पसंख्यकों की संस्कृति और हितों के संरक्षण की व्यवस्था करता है?",
+            opts: ["शिक्षा का अधिकार", "शोषण के विरुद्ध अधिकार", "संवैधानिक उपचारों का अधिकार", "सांस्कृतिक और शैक्षिक अधिकार"],
+            ans: 3
+        }
+    ];
+
+    let userAnswers = new Array(quizData.length).fill(null);
+
+    function startQuiz() {
+        document.getElementById('welcomeScreen').style.display = 'none';
+        document.getElementById('quizScreen').style.display = 'block';
+        renderQuestions();
+    }
+
+    function renderQuestions() {
+        const container = document.getElementById('questionsContainer');
+        container.innerHTML = '';
+
+        quizData.forEach((item, index) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question-container';
+
+            qDiv.innerHTML = `
+                <div>
+                    <span class="topic-tag">⚖️ ${item.sec}</span>
+                    <span class="exam-tag">🏛️ ${item.exam}</span>
+                </div>
+                <div class="question-text"><b>प्रश्न ${item.num}.</b> ${item.q}</div>
+                <div class="options-grid">
+                    ${item.opts.map((opt, i) => `
+                        <div class="option" id="q${index}o${i}" onclick="selectOpt(${index},${i})">(${String.fromCharCode(97 + i)})${opt}</div>
+                    `).join('')}
+                </div>
+            `;
+            container.appendChild(qDiv);
+        });
+    }
+
+    function selectOpt(qIdx, oIdx) {
+        userAnswers[qIdx] = oIdx;
+        const parent = document.querySelectorAll('.question-container')[qIdx];
+        const opts = parent.querySelectorAll('.option');
+        opts.forEach(o => o.classList.remove('selected'));
+        document.getElementById(`q${qIdx}o${oIdx}`).classList.add('selected');
+        
+        let count = userAnswers.filter(x => x !== null).length;
+        document.getElementById('progressBar').style.width = (count / quizData.length) * 100 + '%';
+        document.getElementById('qCounter').innerText = `प्रगति: ${count}/${quizData.length}`;
+    }
+
+    function showResults() {
+        const unanswered = userAnswers.filter(x => x === null).length;
+        if(unanswered > 0) {
+            if(!confirm(`आपके ${unanswered} प्रश्न अभी शेष हैं। क्या आप टेस्ट सबमिट कर परिणाम देखना चाहते हैं?`)) return;
+        }
+
+        document.getElementById('quizScreen').style.display = 'none';
+        document.getElementById('resultScreen').style.display = 'block';
+        
+        let correct = 0;
+        let wrong = 0;
+        let unattempted = 0;
+
+        let reviewHTML = '<h3 style="margin-bottom:20px; color:#f8fafc;">📑 उत्तर कुंजी एवं समीक्षा (Answer Key & Review):</h3>';
+        
+        quizData.forEach((item, i) => {
+            const userAnsIdx = userAnswers[i];
+            const isCorrect = userAnsIdx === item.ans;
+            
+            if (userAnsIdx === null) {
+                unattempted++;
+            } else if (isCorrect) {
+                correct++;
+            } else {
+                wrong++;
+            }
+
+            reviewHTML += `
+                <div class="review-item" style="border-left-color: ${userAnsIdx === null ? '#64748b' : (isCorrect ? '#4ade80' : '#f87171')}">
+                    <p style="color:#60a5fa; font-size:0.88em; font-weight:600; margin-bottom:4px;">${item.sec} | ${item.exam}</p>
+                    <p style="font-weight:600; color:#f8fafc; font-size: 1.05em; white-space: pre-line;">प्रश्न ${item.num}. ${item.q}</p>
+                    <p class="${userAnsIdx === null ? '' : (isCorrect ? 'correct-ans' : 'wrong-ans')}">
+                        ${isCorrect ? '✓' : (userAnsIdx === null ? '⚪' : '✗')} आपका उत्तर: ${userAnsIdx !== null ? '(' + String.fromCharCode(97 + userAnsIdx) + ') ' + item.opts[userAnsIdx] : 'हल नहीं किया'}
+                    </p>
+                    ${!isCorrect ? `<p class="correct-ans">✓ सही उत्तर: (${String.fromCharCode(97 + item.ans)})${item.opts[item.ans]}</p>` : ''}
+                </div>`;
+        });
+
+        const percent = Math.round((correct / quizData.length) * 100);
+        document.getElementById('finalPercent').innerText = `${correct} / ${quizData.length} (${percent}%)`;
+        document.getElementById('statCorrect').innerText = correct;
+        document.getElementById('statWrong').innerText = wrong;
+        document.getElementById('statUnattempted').innerText = unattempted;
+        document.getElementById('reviewContainer').innerHTML = reviewHTML;
+        window.scrollTo(0,0);
+    }
+</script>
+</body>
+</html>
